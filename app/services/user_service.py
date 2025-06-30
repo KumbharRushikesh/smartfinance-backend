@@ -12,6 +12,7 @@ async def create_user(email, password):
     return str(result.inserted_id)
 
 async def authenticate_user(email, password):
+    print("2nd")
     user = await db.users.find_one({"email": email})
     if not user or not verify_password(password, user["password"]):
         return None

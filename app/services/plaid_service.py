@@ -9,6 +9,7 @@ from plaid import Configuration, ApiClient
 from datetime import datetime, timedelta
 import os
 from app.config import PLAID_CLIENT_ID, PLAID_SECRET, PLAID_ENV
+from plaid.model.country_code import CountryCode
 
 # Setup configuration
 configuration = Configuration(
@@ -27,7 +28,7 @@ async def create_link_token(user_id: str):
         user=LinkTokenCreateRequestUser(client_user_id=user_id),
         client_name="SmartFinance AI",
         products=[Products("transactions")],
-        country_codes=["IN"],
+        country_codes=[CountryCode.IN],
         language="en",
         redirect_uri=os.getenv("PLAID_REDIRECT_URI")
     )

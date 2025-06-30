@@ -13,6 +13,7 @@ async def signup(user: UserIn):
 
 @router.post("/login")
 async def login(user: UserIn):
+    print("1st")
     token = await authenticate_user(user.email, user.password)
     if not token:
         raise HTTPException(status_code=401, detail="Invalid credentials")

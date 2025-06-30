@@ -8,8 +8,8 @@ from bson import ObjectId
 router = APIRouter()
 
 @router.get("/bank/link-token")
-async def get_link_token(user=Depends(get_current_user)):
-    token = await plaid_service.create_link_token(user["id"])
+async def get_link_token(user: dict = Depends(get_current_user)):
+    token = await plaid_service.create_link_token(str(user["_id"]))
     return {"link_token": token}
 
 @router.post("/bank/exchange-token")

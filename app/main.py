@@ -32,17 +32,22 @@ def custom_openapi():
         description="API for SmartFinance",
         routes=app.routes,
     )
+    # 🔥 ADD this: Define security scheme
     openapi_schema["components"]["securitySchemes"] = {
         "BearerAuth": {
             "type": "http",
             "scheme": "bearer",
-            "bearerFormat": "JWT",
+            "bearerFormat": "JWT"
         }
     }
+
+    # 🔥 ADD this: Apply security to all paths
     for path in openapi_schema["paths"].values():
-        for method in path.values():
-            method.setdefault("security", [{"BearerAuth": []}])
+        for operation in path.values():
+            operation["security"] = [{"BearerAuth": []}]
+
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 
+# 🔥 Re-assign
 app.openapi = custom_openapi
