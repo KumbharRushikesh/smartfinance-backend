@@ -16,4 +16,7 @@ async def login(user: UserIn):
     token = await authenticate_user(user.email, user.password)
     if not token:
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    return {"access_token": token}
+    return {
+        "access_token": token,
+        "token_type": "bearer"  # <-- required for Swagger to work
+    }
