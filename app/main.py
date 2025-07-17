@@ -5,13 +5,16 @@ from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.openapi.utils import get_openapi
 
 from app.routes import auth_routes
+# from app.routes import bank__routes
 from app.routes import bank_routes
+
 
 app = FastAPI()
 
 # Include /auth/signup and /auth/login routes
 app.include_router(auth_routes.router, prefix="/auth")
-app.include_router(bank_routes.router, prefix="/api")
+# app.include_router(bank__routes.router, prefix="/api")
+app.include_router(bank_routes.router, prefix="/setu")
 
 
 app.add_middleware(

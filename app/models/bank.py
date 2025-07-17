@@ -1,10 +1,11 @@
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel
+from typing import Optional
 
-class ExchangeTokenRequest(BaseModel):
-    public_token: str
-    institution_name: str  # e.g., "BOB", "SBI"
+class ConsentInitRequest(BaseModel):
+    customer_id: str  # e.g., phone or account number
 
-class BankAccountOut(BaseModel):
-    id: str
-    institution_name: str
+class TransactionFilter(BaseModel):
+    account_id: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    txn_type: Optional[str] = None  # credit/debit
